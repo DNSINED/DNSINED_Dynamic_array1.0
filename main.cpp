@@ -88,7 +88,6 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
     bool test_passed = false;
     struct Dynamic_Array_Char myArray{};
     struct Dynamic_Array_Int myArray_Int{};
-    //ifstream file(R"(C:\Users\savan\CLionProjects\untitled1\fisier.txt)");
     ifstream file(file_path);
 
     if (!file.is_open()) {
@@ -105,16 +104,8 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 
     file.close();
 
-    int lines = correct_lines;//for test
-    //bool wordFound = search_word(&myArray, word);
     test_passed = search_word(&myArray, &myArray_Int, word);
 
-
-     //   int firstElement = result->array[0]; // Accessing the first element
-        // Use firstElement as needed
-    //} else {
-        // Handle case when result is nullptr or empty
-    //}
     clear_Int(&myArray_Int);
     clear(&myArray);
     return test_passed;
@@ -123,46 +114,15 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 
 
 int main() {
-    /*
-    struct Dynamic_Array myArray{};
-    ifstream file(R"(C:\Users\savan\CLionProjects\untitled1\fisier.txt)");
-
-    if (!file.is_open()) {
-        cerr << "Failed to open the file." << endl;
-        return 1;
-    }
-
-    init(&myArray, 10);
-
-    char ch;
-    while (file.get(ch)) {
-        add(&myArray, ch);
-    }
-
-    file.close();
-
-    char word[100];
-    cout << "Enter a word to search: ";
-    cin >> word;
-
-    bool wordFound = search_word(&myArray, word);
-
-    if (!wordFound) {
-        cout << "The searched word does not exist in the file." << endl;
-    }
-
-    clear(&myArray);
-
-    return 0;*/
     string file_path = R"(C:\Users\savan\CLionProjects\untitled1\fisier.txt)";
-    string word_0 = "how";
+    const char *word_0 = "how";
     int correct_lines_0 = 2453;
     const char *word_1 = "holmes";
     int correct_lines_1 = 467;
-    string word_2 = "gentleman";
+    const char * word_2 = "gentleman";
     int correct_lines_2 = 100;
     bool test_passed = false;
-    test_passed = run_test(file_path, word_1, correct_lines_1);
+    test_passed = run_test(file_path, word_2, correct_lines_0);
     if (test_passed) {
         cout << "Test passed succesfully" << endl;
     }
