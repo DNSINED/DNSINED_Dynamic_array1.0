@@ -50,7 +50,7 @@ void resize_Int(struct Dynamic_Array_Int *arr_int) {
     arr_int->array = (int *)realloc(arr_int->array, arr_int->capacity * sizeof(int));
 }
 
-void add_Int(struct Dynamic_Array_Int *arr_int, const int val) {
+void add_Int(struct Dynamic_Array_Int *arr_int,  int val) {
     if (arr_int->size == arr_int->capacity) {
         resize_Int(arr_int);
     }
@@ -60,10 +60,10 @@ void add_Int(struct Dynamic_Array_Int *arr_int, const int val) {
 void clear_Int(struct Dynamic_Array_Int *arr_int) {
     free(arr_int->array);
 }
-bool search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *arr_int, const char *word) {
+int search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *arr_int, const char *word) {
     int line = 1;
     bool test_passed = false;
-    int line_found = 0;
+    int lines_found = 0;
     for (int i = 0; i < arr->size; ++i) {
         if (arr->array[i] == '\n') {
             line++;
@@ -73,15 +73,12 @@ bool search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *arr_int, const char
                 j++;
             }
             if (word[j] == '\0') {
-                line_found++;
-                add_Int(arr_int, line_found);
+                lines_found++;
+                add_Int(arr_int, lines_found);
             }
         }
     }
-    if (line_found != 0) {
-        test_passed = true;
-    }
-    return test_passed;
+    return lines_found;
 }
 
 bool run_test(const string& file_path, const char *word, int correct_lines) {
@@ -104,7 +101,10 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 
     file.close();
 
-    test_passed = search_word(&myArray, &myArray_Int, word);
+    int lines_found = search_word(&myArray, &myArray_Int, word);
+    if (lines_found == correct_lines) {
+        test_passed = true;
+    }
 
     clear_Int(&myArray_Int);
     clear(&myArray);
@@ -116,13 +116,13 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 int main() {
     string file_path = R"(C:\Users\savan\CLionProjects\untitled1\fisier.txt)";
     const char *word_0 = "how";
-    int correct_lines_0 = 2453;
+    int correct_lines_0 = 2452;
     const char *word_1 = "holmes";
     int correct_lines_1 = 467;
     const char * word_2 = "gentleman";
     int correct_lines_2 = 100;
     bool test_passed = false;
-    test_passed = run_test(file_path, word_2, correct_lines_0);
+    test_passed = run_test(file_path, word_1, correct_lines_1);
     if (test_passed) {
         cout << "Test passed succesfully" << endl;
     }
