@@ -3,8 +3,10 @@
 #include <cstdlib>
 #include <string>
 #include <chrono>
+#include <filesystem>
 
 using namespace std;
+namespace fs = filesystem;
 
 struct Dynamic_Array_Char {
     char *array;
@@ -138,6 +140,10 @@ int main() {
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start).count();
-    cout << "Execution time: " << duration << " milliseconds" << endl;
+
+    uintmax_t filesize = fs::file_size(file_path);
+    double megabytes = static_cast<double>(filesize) / (1024 * 1024);
+
+    cout << "File: " << file_path << "        Size: " << megabytes << " MB"<< "        Execution time: " << duration << " ms" << endl;
     return 0;
 }
