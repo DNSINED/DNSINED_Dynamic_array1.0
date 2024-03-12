@@ -96,13 +96,22 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
     init(&myArray, 10);
 
     char ch;
+    auto start_1 = chrono::high_resolution_clock::now();
     while (file.get(ch)) {
         add(&myArray, ch);
     }
+    auto end_1 = chrono::high_resolution_clock::now();
+    auto duration_1 = chrono::duration_cast<chrono::milliseconds>(end_1 - start_1).count();
+    cout << "Load words from file execution time: " << duration_1 << " ms" << endl;
 
     file.close();
 
+    auto start_0 = chrono::high_resolution_clock::now();
     search_word(&myArray, &myArray_Int, word);
+    auto end_0 = chrono::high_resolution_clock::now();
+    auto duration_0 = chrono::duration_cast<chrono::milliseconds>(end_0 - start_0).count();
+    cout << "Search_Word execution time: " << duration_0 << " ms" << endl;
+
     int lines_found = 0;
     while (lines_found < myArray_Int.size) {
         ++lines_found;
