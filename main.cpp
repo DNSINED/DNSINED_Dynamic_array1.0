@@ -120,7 +120,7 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 int main() {
     auto start = chrono::high_resolution_clock::now();
 
-    string file_path = R"(/home/vali/DNSINED_Dynamic_array1.0/fisier.txt)";
+    string file_path = R"(../fisier.txt)";
     const char *word_0 = "how";
     int correct_lines_0 = 2452;
     const char *word_1 = "holmes";
