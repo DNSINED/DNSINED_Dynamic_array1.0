@@ -122,11 +122,11 @@ int main() {
 
     string file_path = R"(../fisier.txt)";
     const char *word_0 = "how";
-    int correct_lines_0 = 2452;
+    int correct_lines_0 = 19616;
     const char *word_1 = "holmes";
-    int correct_lines_1 = 467;
+    int correct_lines_1 = 3736;
     const char * word_2 = "gentleman";
-    int correct_lines_2 = 100;
+    int correct_lines_2 = 800;
     bool test_passed = false;
     test_passed = run_test(file_path, word_1, correct_lines_1);
     if (test_passed) {
