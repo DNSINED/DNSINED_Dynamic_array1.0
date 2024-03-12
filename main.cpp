@@ -127,7 +127,7 @@ int main() {
     bool test_passed = false;
     test_passed = run_test(file_path, word_1, correct_lines_1);
     if (test_passed) {
-        cout << "Test passed succesfully" << endl;
+        cout << "Test passed successfully" << endl;
     }
     else {
         cout << "Test failed." << endl;
