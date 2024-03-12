@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -117,6 +118,8 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 
 
 int main() {
+    auto start = chrono::high_resolution_clock::now();
+
     string file_path = R"(C:\Users\savan\CLionProjects\untitled1\fisier.txt)";
     const char *word_0 = "how";
     int correct_lines_0 = 2452;
@@ -132,5 +135,9 @@ int main() {
     else {
         cout << "Test failed." << endl;
     }
+
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    cout << "Execution time: " << duration << " milliseconds" << endl;
     return 0;
 }
