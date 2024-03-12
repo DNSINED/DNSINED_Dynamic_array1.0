@@ -60,9 +60,8 @@ void add_Int(struct Dynamic_Array_Int *arr_int,  int val) {
 void clear_Int(struct Dynamic_Array_Int *arr_int) {
     free(arr_int->array);
 }
-int search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *arr_int, const char *word) {
+void search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *lines, const char *word) {
     int line = 1;
-    bool test_passed = false;
     int lines_found = 0;
     for (int i = 0; i < arr->size; ++i) {
         if (arr->array[i] == '\n') {
@@ -74,11 +73,10 @@ int search_word(Dynamic_Array_Char *arr, Dynamic_Array_Int *arr_int, const char 
             }
             if (word[j] == '\0') {
                 lines_found++;
-                add_Int(arr_int, lines_found);
+                add_Int(lines, line);
             }
         }
     }
-    return lines_found;
 }
 
 bool run_test(const string& file_path, const char *word, int correct_lines) {
@@ -101,7 +99,12 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
 
     file.close();
 
-    int lines_found = search_word(&myArray, &myArray_Int, word);
+    search_word(&myArray, &myArray_Int, word);
+    int lines_found = 0;
+    while (lines_found < myArray_Int.size) {
+        ++lines_found;
+    }
+
     if (lines_found == correct_lines) {
         test_passed = true;
     }
