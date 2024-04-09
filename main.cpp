@@ -1,9 +1,9 @@
-#include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <string>
 #include <chrono>
 #include <filesystem>
+#include "Boyer_Moore.h"
 
 using namespace std;
 namespace fs = filesystem;
@@ -125,9 +125,6 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
     clear(&myArray);
     return test_passed;
 }
-
-
-
 int main() {
     auto start = chrono::high_resolution_clock::now();
 
@@ -154,5 +151,16 @@ int main() {
     double megabytes = static_cast<double>(filesize) / (1024 * 1024);
 
     cout << "File: " << file_path << "        Size: " << megabytes << " MB"<< "        Execution time: " << duration << " ms" << endl;
+
+    uint8_t string[] = "this is a test string";
+    uint8_t pat[] = "test";
+    uint8_t* result = boyer_moore(string, strlen(reinterpret_cast<char*>(string)), pat, strlen(reinterpret_cast<char*>(pat)));
+
+    if (result) {
+        cout << "Pattern found at index: " << (result - string) << endl;
+    } else {
+        cout << "Pattern not found" << endl;
+    }
+
     return 0;
 }
