@@ -127,18 +127,6 @@ bool run_test(const string& file_path, const char *word, int correct_lines) {
     clear(&myArray);
     return test_passed;
 }
-void search_word_boyer_moore(uint8_t *text, size_t text_len, Dynamic_Array_Int *lines, const char *word) {
-    vector<size_t> occurrences = boyer_moore_all(text, text_len, (uint8_t *) word, strlen(word));
-    for (unsigned long long occurrence : occurrences) {
-        int line_number = 1;
-        for (size_t j = 0; j < occurrence; ++j) {
-            if (text[j] == '\n') {
-                line_number++;
-            }
-        }
-        add_Int(lines, line_number);
-    }
-}
 
 bool run_test_boyer_moore(const string& file_path, const char *word, int correct_lines) {
     bool test_passed = false;
@@ -167,9 +155,12 @@ bool run_test_boyer_moore(const string& file_path, const char *word, int correct
         file_content_lower[i] = tolower(file_content[i]);
     }
 
+    auto start = chrono::high_resolution_clock::now();
     vector<size_t> occurrences = boyer_moore_all(file_content_lower.data(), file_size,
                                                  reinterpret_cast<uint8_t *>(const_cast<char *>(word_lower.c_str())), word_lower.length());
-
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start).count();
+    cout << "Boyer-Moore execution time: " << duration << " ms" << endl;
     if (occurrences.size() == correct_lines) {
         test_passed = true;
     }
