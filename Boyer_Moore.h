@@ -60,7 +60,7 @@ void make_delta2(vector<ptrdiff_t>& delta2, const string& pat) {
     }
 }
 
-vector<size_t> boyer_moore_all(uint8_t* string, size_t stringlen, char *pat, size_t patlen) {
+vector<size_t> boyer_moore_all(uint8_t* string, size_t stringlen, uint8_t *pat, size_t patlen) {
     vector<size_t> occurrences;
     vector<ptrdiff_t> delta1(ALPHABET_LEN);
     vector<ptrdiff_t> delta2(patlen);
